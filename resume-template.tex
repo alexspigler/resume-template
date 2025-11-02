@@ -1,0 +1,376 @@
+%-------------------------
+% Resume in LaTeX
+% Designed for current or recently graduated students
+
+% Author: Alex Spigler
+% Repository: https://github.com/alexspigler/resume-template
+%   Based on: https://github.com/jakegut/resume (Jake Gutierrez)
+%     Which itself was based on: https://github.com/sb2nov/resume (Sourabh Bajaj)
+% License: MIT
+%------------------------
+
+
+%-------------------------
+% Document Setup
+%-------------------------
+\documentclass[letterpaper,11pt]{article}
+
+
+%-------------------------
+% Packages
+%-------------------------
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{etoolbox}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{anyfontsize}
+\input{glyphtounicode}
+
+
+%----------FONT OPTIONS----------
+% if all commented out, uses latex default
+
+% Sans-serif options (modern / clean)
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[sfdefault]{sourcesanspro}
+
+% Serif options (traditional / academic)
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+%---------------------------------
+
+
+%----------HEADER/FOOTER OPTIONS-------------
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+%---------------------------------------------
+
+
+%-----------SHARED FORMATTING------------------
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+% URL formatting
+\urlstyle{same}
+
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Bullet formatting
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% List wrappers
+\newlength{\ListLeftMargin}  \setlength{\ListLeftMargin}{0.15in}      % first level indent
+\newlength{\ListNestedMargin} \setlength{\ListNestedMargin}{0.25in}   % second level indent (additional from first)
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=\ListLeftMargin, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[itemsep=0pt, parsep=0pt, topsep=0pt, leftmargin=\ListNestedMargin]}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+%-------------------------------------------------
+
+
+
+
+
+%------------------------------------------------
+% Custom commands (Section Specific Formatting)
+%------------------------------------------------
+
+%-------------------------------------------------------------
+% 1) EDUCATION
+%    Tunable Settings: left column starting point + width,
+%                      gap, right column margin, row spacing
+%-------------------------------------------------------------
+
+% Education subheading (2-row table: org + dates / italics row)
+\newcommand{\EduSubheading}[4]{%
+  \vspace{-2pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\fontsize{10.5}{12} #3} & \textit{\small #4} \\
+  \end{tabular*}\vspace{-9pt}
+}
+% Education subheading (3-row variant)
+\newcommand{\EduSubheadingExtra}[6]{%
+  \vspace{-2pt}\item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\fontsize{10.5}{12}\selectfont #3} & \textit{\small #4} \\
+    \textit{\fontsize{10.5}{12}\selectfont #5} & \textit{\small #6} \\
+  \end{tabular*}\vspace{-9pt}
+}
+
+% Coursework "label : values" grid
+\newlength{\EduLeftStart}    \setlength{\EduLeftStart}{0in}                 % left column starting point
+\newlength{\EduLeftWidth}    \setlength{\EduLeftWidth}{0.4\linewidth}       % left column width
+\newlength{\EduGap}          \setlength{\EduGap}{0em}                       % gap between both columns
+\newlength{\EduRightMargin}  \setlength{\EduRightMargin}{0.08\linewidth}    % right column margin
+\newcommand{\EduRowHeight}{\renewcommand{\arraystretch}{1.5}}               % row spacing
+
+% Coursework environment
+\newenvironment{EduCoursework}{%
+  \EduRowHeight
+  \begin{tabular}{@{\hspace*{\EduLeftStart}}%
+    >{\bfseries}p{\EduLeftWidth}%
+    @{\hspace{\EduGap}}%
+    >{\raggedright\arraybackslash}p{\dimexpr\linewidth-\EduLeftWidth-\EduGap-\EduRightMargin\relax}%
+    @{}}
+}{%
+  \end{tabular}
+}
+
+
+%-------------------------------------------------------------------------
+% 2) PROJECTS
+%    Tunable Settings: bullet starting point, right margin, bullet spacing
+%-------------------------------------------------------------------------
+\newlength{\ProjBulStart}    \setlength{\ProjBulStart}{0in}                   % bullet starting point
+\newlength{\ProjRightMargin}  \setlength{\ProjRightMargin}{0.08\linewidth}    % right margin
+\newcommand{\ProjBulHeight}{\renewcommand{\arraystretch}{1.25}}                % bullet spacing
+
+% Project heading (title left, dates right)
+\newcommand{\ProjHeading}[2]{%
+  \vspace{0pt}
+  \item
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \small #1 & #2 \\
+  \end{tabular*}\vspace{-5pt}
+}
+
+
+%--------------------------------------------------------------
+% 3) SKILLS
+%    Tunable Settings: left column starting point + width,
+%                      gap, right column margin, row spacing
+%--------------------------------------------------------------
+\newlength{\SkillLeftStart}    \setlength{\SkillLeftStart}{0in}                  % left column starting point
+\newlength{\SkillLeftWidth}    \setlength{\SkillLeftWidth}{0.35\linewidth}       % left column width
+\newlength{\SkillGap}          \setlength{\SkillGap}{0.1em}                      % gap between both columns
+\newlength{\SkillRightMargin}  \setlength{\SkillRightMargin}{0.05\linewidth}     % right column margin
+\newcommand{\SkillRowHeight}{\renewcommand{\arraystretch}{1.2}}                  % row spacing
+
+% Skills environment
+\newenvironment{SkillsTable}{%
+  \SkillRowHeight
+  \begin{tabular}{@{\hspace*{\SkillLeftStart}}%
+    >{\bfseries}p{\SkillLeftWidth}%
+    @{\hspace{\SkillGap}}%
+    >{\raggedright\arraybackslash}p{\dimexpr\linewidth-\SkillLeftWidth-\SkillGap-\SkillRightMargin-\SkillLeftStart\relax}%
+    @{}}
+}{%
+  \end{tabular}
+}
+
+
+%--------------------------------------------------------------------------
+% E) EXPERIENCE
+%    Tunable Settings: bullet starting point, right margin, bullet spacing
+%--------------------------------------------------------------------------
+\newlength{\ExpBulStart}      \setlength{\ExpBulStart}{0in}                 % bullet starting point
+\newlength{\ExpRightMargin}   \setlength{\ExpRightMargin}{0.08\linewidth}   % right margin
+\newcommand{\ExpBulHeight}{\renewcommand{\arraystretch}{1}}                 % bullet spacing
+
+\newcommand{\ExpSubheading}[4]{%
+  \vspace{-4pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \vspace{-3pt}
+      \textbf{#1} & #2 \\
+      \textit{\small #3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-6pt}
+}
+
+
+
+
+%-------------------------------------------
+%           RESUME STARTS HERE
+%-------------------------------------------
+\begin{document}
+
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape First Last} \\ \vspace{2pt}
+    \small \href{mailto:yourname@email.com}{\underline{yourname@email.com}} $|$ 
+    \href{https://linkedin.com/in/yourprofile}{\underline{linkedin.com/in/yourprofile}} $|$
+    \href{https://github.com/yourusername}{\underline{github.com/yourusername}}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \vspace{0.7pt}
+  \resumeSubHeadingListStart
+    \EduSubheadingExtra
+      {Your University}{Aug. 20XX -- May 20XX}
+      {BS in Major; Minor in Minor}{City, State}
+      {Overall GPA: X.XX $|$ Major GPA: X.XX}{}
+      \vspace{5pt}
+    \resumeItemListStart
+      \item[]
+      \begin{minipage}[t]{1\linewidth}
+      \small
+      \begin{EduCoursework}
+      Major Coursework: & Course Name 1, Course Name 2, Course Name 3, Course Name 4, Course Name 5, Course Name 6, Course Name 7 \\
+      Computing Coursework: & Course Name 1, Course Name 2, Course Name 3, Course Name 4, Course Name 5 \\
+      Mathematics Coursework: & Course Name 1, Course Name 2, Course Name 3, Course Name 4 \\
+      \end{EduCoursework}
+      \end{minipage}
+    \resumeItemListEnd
+    \vspace{1pt}
+  \resumeSubHeadingListEnd
+
+
+%-----------PROJECTS-----------
+\section{Projects}
+  \vspace{-1.5pt}
+  \resumeSubHeadingListStart
+  \ProjHeading{\textbf{Project Title} $|$ \emph{Technology/Language}}{Month Year -- Present}
+  \vspace{-10pt}
+    \resumeItemListStart
+      \item[]
+      \begin{minipage}[t]{1\linewidth}
+      \small
+      {\ProjBulHeight
+      \begin{tabular}{@{\hspace*{\ProjBulStart}}p{\dimexpr\linewidth-\ProjRightMargin\relax}@{}}
+      \hangindent=0.85em \labelitemii\ Description of what the project does and the problem it solves. \\
+      \hangindent=0.85em \labelitemii\ Technical implementation details, technologies used, and notable features. \\
+      \hangindent=0.85em \labelitemii\ Specific libraries, frameworks, or tools utilized in the project. \\
+      \hangindent=0.85em \labelitemii\ Additional achievements, optimizations, or capabilities of the project. \\
+      \end{tabular}}
+      \end{minipage}
+    \resumeItemListEnd
+    \vspace{4pt}
+  \ProjHeading{\textbf{Project Title} $|$ \emph{Technology/Language}}{Month Year -- Month Year}
+    \vspace{-10pt}
+    \resumeItemListStart
+      \item[]
+      \begin{minipage}[t]{1\linewidth}
+      \small
+      {\ProjBulHeight
+      \begin{tabular}{@{\hspace*{\ProjBulStart}}p{\dimexpr\linewidth-\ProjRightMargin\relax}@{}}
+      \hangindent=0.85em \labelitemii\ Description of what the project does and the problem it solves. \\
+      \hangindent=0.85em \labelitemii\ Technical implementation details, technologies used, and notable features. \\
+      \hangindent=0.85em \labelitemii\ Specific libraries, frameworks, or tools utilized in the project. \\
+      \hangindent=0.85em \labelitemii\ Additional achievements, optimizations, or capabilities of the project. \\
+      \end{tabular}}
+      \end{minipage}
+    \resumeItemListEnd 
+    \vspace{3pt}
+  \resumeSubHeadingListEnd
+
+
+%-----------TECHNICAL SKILLS-----------
+\section{Technical Skills}
+  \resumeSubHeadingListStart
+    \vspace{-5pt}
+    \item[]
+    \begin{minipage}[t]{1\linewidth}
+    \small
+    \begin{SkillsTable}
+    Languages: & Language 1, Language 2, Language 3 \\
+    Libraries/Frameworks: & Library 1, Library 2, Library 3 \\
+    Specialized Skills: & Skill 1, Skill 2, Skill 3, Skill 4, Skill 5 \\
+    Tools \& Technologies: & Tool 1, Tool 2 \\
+    \end{SkillsTable}
+    \end{minipage}
+    \vspace{-4pt}
+  \resumeSubHeadingListEnd
+
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \vspace{2.3pt}
+  \resumeSubHeadingListStart
+    \ExpSubheading
+      {Job Title}{Month Year -- Month Year}
+      {Company Name}{City, State}
+      \resumeItemListStart
+        \item[]
+        \begin{minipage}[t]{1\linewidth}
+        \small
+        {\ExpBulHeight
+        \begin{tabular}{@{\hspace*{\ExpBulStart}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
+        \hangindent=0.85em \labelitemii\ Description of responsibilities and achievements in this role. \\
+        \hangindent=0.85em \labelitemii\ Additional accomplishments or notable contributions. \\
+        \end{tabular}}
+        \end{minipage}
+      \resumeItemListEnd
+      \vspace{5pt}
+    \ExpSubheading
+      {Job Title}{Month Year -- Month Year}
+      {Company Name}{City/Remote}
+      \resumeItemListStart
+        \item[]
+        \begin{minipage}[t]{1\linewidth}
+        \small
+        {\ExpBulHeight
+        \begin{tabular}{@{\hspace*{\ExpBulStart}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
+        \hangindent=0.85em \labelitemii\ Description of responsibilities and key tasks performed. \\
+        \hangindent=0.85em \labelitemii\ Problem-solving accomplishments and technical skills applied. \\
+        \hangindent=0.85em \labelitemii\ Additional relevant achievements or contributions. \\
+        \end{tabular}}
+        \end{minipage}
+      \resumeItemListEnd
+      \vspace{5pt}
+    \ExpSubheading
+      {Job Title}{Month Year -- Month Year}
+      {Organization Name}{City, State}
+      \resumeItemListStart
+        \item[]
+        \begin{minipage}[t]{1\linewidth}
+        \small
+        {\ExpBulHeight
+        \begin{tabular}{@{\hspace*{\ExpBulStart}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
+        \hangindent=0.85em \labelitemii\ Description of research or work conducted using specialized equipment or methods. \\
+        \hangindent=0.85em \labelitemii\ Data analysis, documentation, or visualization responsibilities. \\
+        \end{tabular}}
+        \end{minipage}
+      \resumeItemListEnd
+      \vspace{5pt}
+    \ExpSubheading
+      {Job Title}{Month Year -- Month Year}
+      {Organization Name}{City, State}
+      \resumeItemListStart
+        \item[]
+        \begin{minipage}[t]{1\linewidth}
+        \small
+        {\ExpBulHeight
+        \begin{tabular}{@{\hspace*{\ExpBulStart}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
+        \hangindent=0.85em \labelitemii\ Description of laboratory or technical responsibilities. \\
+        \hangindent=0.85em \labelitemii\ Collaboration and workflow management contributions. \\
+        \hangindent=0.85em \labelitemii\ Presentation or documentation of research findings. \\
+        \end{tabular}}
+        \end{minipage}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+%-------------------------------------------
+\end{document}

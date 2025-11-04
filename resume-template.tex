@@ -106,7 +106,8 @@
 %-------------------------------------------------------------
 % 1) EDUCATION
 %    Tunable Settings: left column starting point + width,
-%                      gap, right column margin, row spacing
+%                      gap, right column margin, row spacing,
+%                      wrapped line spacing
 %-------------------------------------------------------------
 
 % Education subheading (2-row table: org + dates / italics row)
@@ -133,6 +134,8 @@
 \newlength{\EduGap}          \setlength{\EduGap}{0em}                       % gap between both columns
 \newlength{\EduRightMargin}  \setlength{\EduRightMargin}{0.08\linewidth}    % right column margin
 \newcommand{\EduRowHeight}{\renewcommand{\arraystretch}{1.5}}               % row spacing
+\newlength{\EduWrapHeight} \setlength{\EduWrapHeight}{11pt}                 % wrapped line spacing
+
 
 % Coursework environment
 \newenvironment{EduCoursework}{%
@@ -140,7 +143,7 @@
   \begin{tabular}{@{\hspace*{\EduLeftStart}}%
     >{\bfseries}p{\EduLeftWidth}%
     @{\hspace{\EduGap}}%
-    >{\raggedright\arraybackslash}p{\dimexpr\linewidth-\EduLeftWidth-\EduGap-\EduRightMargin\relax}%
+    >{\setlength{\baselineskip}{\EduWrapHeight}\raggedright\arraybackslash}p{\dimexpr\linewidth-\EduLeftWidth-\EduGap-\EduRightMargin\relax}%
     @{}}
 }{%
   \end{tabular}
@@ -149,11 +152,14 @@
 
 %-------------------------------------------------------------------------
 % 2) PROJECTS
-%    Tunable Settings: bullet starting point, right margin, bullet spacing
+%    Tunable Settings: bullet starting point, right margin,
+%.                     bullet spacing, wrapped line spacing
 %-------------------------------------------------------------------------
 \newlength{\ProjBulStart}    \setlength{\ProjBulStart}{0in}                   % bullet starting point
 \newlength{\ProjRightMargin}  \setlength{\ProjRightMargin}{0.08\linewidth}    % right margin
 \newcommand{\ProjBulHeight}{\renewcommand{\arraystretch}{1.25}}                % bullet spacing
+\newlength{\ProjWrapHeight} \setlength{\ProjWrapHeight}{11pt}                 % wrapped line spacing
+
 
 % Project heading (title left, dates right)
 \newcommand{\ProjHeading}[2]{%
@@ -168,13 +174,15 @@
 %--------------------------------------------------------------
 % 3) SKILLS
 %    Tunable Settings: left column starting point + width,
-%                      gap, right column margin, row spacing
+%                      gap, right column margin, row spacing,
+%                      wrapped line spacing
 %--------------------------------------------------------------
 \newlength{\SkillLeftStart}    \setlength{\SkillLeftStart}{0in}                  % left column starting point
 \newlength{\SkillLeftWidth}    \setlength{\SkillLeftWidth}{0.35\linewidth}       % left column width
 \newlength{\SkillGap}          \setlength{\SkillGap}{0.1em}                      % gap between both columns
 \newlength{\SkillRightMargin}  \setlength{\SkillRightMargin}{0.05\linewidth}     % right column margin
 \newcommand{\SkillRowHeight}{\renewcommand{\arraystretch}{1.2}}                  % row spacing
+\newlength{\SkillWrapHeight} \setlength{\SkillWrapHeight}{11pt}                  % wrapped line spacing
 
 % Skills environment
 \newenvironment{SkillsTable}{%
@@ -182,7 +190,7 @@
   \begin{tabular}{@{\hspace*{\SkillLeftStart}}%
     >{\bfseries}p{\SkillLeftWidth}%
     @{\hspace{\SkillGap}}%
-    >{\raggedright\arraybackslash}p{\dimexpr\linewidth-\SkillLeftWidth-\SkillGap-\SkillRightMargin-\SkillLeftStart\relax}%
+    >{\setlength{\baselineskip}{\SkillWrapHeight}\raggedright\arraybackslash}p{\dimexpr\linewidth-\SkillLeftWidth-\SkillGap-\SkillRightMargin-\SkillLeftStart\relax}%
     @{}}
 }{%
   \end{tabular}
@@ -191,11 +199,13 @@
 
 %--------------------------------------------------------------------------
 % 4) EXPERIENCE
-%    Tunable Settings: bullet starting point, right margin, bullet spacing
+%    Tunable Settings: bullet starting point, right margin
+%                      bullet spacing, wrapped line spacing
 %--------------------------------------------------------------------------
 \newlength{\ExpBulStart}      \setlength{\ExpBulStart}{0in}                 % bullet starting point
 \newlength{\ExpRightMargin}   \setlength{\ExpRightMargin}{0.08\linewidth}   % right margin
 \newcommand{\ExpBulHeight}{\renewcommand{\arraystretch}{1}}                 % bullet spacing
+\newlength{\ExpWrapHeight} \setlength{\ExpWrapHeight}{11pt}                 % wrapped line spacing
 
 \newcommand{\ExpSubheading}[4]{%
   \vspace{-4pt}\item
@@ -243,7 +253,7 @@
       \end{EduCoursework}
       \end{minipage}
     \resumeItemListEnd
-    \vspace{1pt}
+    \vspace{5pt}
   \resumeSubHeadingListEnd
 
 
@@ -258,7 +268,7 @@
       \begin{minipage}[t]{1\linewidth}
       \small
       {\ProjBulHeight
-      \begin{tabular}{@{\hspace*{\ProjBulStart}}p{\dimexpr\linewidth-\ProjRightMargin\relax}@{}}
+      \begin{tabular}{@{\hspace*{\ProjBulStart}}>{\setlength{\baselineskip}{\ProjWrapHeight}}p{\dimexpr\linewidth-\ProjRightMargin\relax}@{}}
       \hangindent=0.85em \labelitemii\ Description of what the project does and the problem it solves. \\
       \hangindent=0.85em \labelitemii\ Technical implementation details, technologies used, and notable features. \\
       \hangindent=0.85em \labelitemii\ Specific libraries, frameworks, or tools utilized in the project. \\
@@ -274,7 +284,7 @@
       \begin{minipage}[t]{1\linewidth}
       \small
       {\ProjBulHeight
-      \begin{tabular}{@{\hspace*{\ProjBulStart}}p{\dimexpr\linewidth-\ProjRightMargin\relax}@{}}
+      \begin{tabular}{@{\hspace*{\ProjBulStart}}>{\setlength{\baselineskip}{\ProjWrapHeight}}p{\dimexpr\linewidth-\ProjRightMargin\relax}@{}}
       \hangindent=0.85em \labelitemii\ Description of what the project does and the problem it solves. \\
       \hangindent=0.85em \labelitemii\ Technical implementation details, technologies used, and notable features. \\
       \hangindent=0.85em \labelitemii\ Specific libraries, frameworks, or tools utilized in the project. \\
@@ -282,7 +292,7 @@
       \end{tabular}}
       \end{minipage}
     \resumeItemListEnd 
-    \vspace{3pt}
+    \vspace{5pt}
   \resumeSubHeadingListEnd
 
 
@@ -300,7 +310,7 @@
     Tools \& Technologies: & Tool 1, Tool 2, Tool 3\\
     \end{SkillsTable}
     \end{minipage}
-    \vspace{-4pt}
+    \vspace{5pt}
   \resumeSubHeadingListEnd
 
 
@@ -316,7 +326,7 @@
         \begin{minipage}[t]{1\linewidth}
         \small
         {\ExpBulHeight
-        \begin{tabular}{@{\hspace*{\ExpBulStart}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
+        \begin{tabular}{@{\hspace*{\ExpBulStart}}>{\setlength{\baselineskip}{\ExpWrapHeight}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
         \hangindent=0.85em \labelitemii\ Description of responsibilities and achievements. \\
         \hangindent=0.85em \labelitemii\ Additional accomplishments or notable contributions. \\
         \end{tabular}}
@@ -331,7 +341,7 @@
         \begin{minipage}[t]{1\linewidth}
         \small
         {\ExpBulHeight
-        \begin{tabular}{@{\hspace*{\ExpBulStart}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
+        \begin{tabular}{@{\hspace*{\ExpBulStart}}>{\setlength{\baselineskip}{\ExpWrapHeight}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
         \hangindent=0.85em \labelitemii\ Description of responsibilities and achievements. \\
         \hangindent=0.85em \labelitemii\ Additional accomplishments or notable contributions. \\
         \end{tabular}}
@@ -346,7 +356,7 @@
         \begin{minipage}[t]{1\linewidth}
         \small
         {\ExpBulHeight
-        \begin{tabular}{@{\hspace*{\ExpBulStart}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
+        \begin{tabular}{@{\hspace*{\ExpBulStart}}>{\setlength{\baselineskip}{\ExpWrapHeight}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
         \hangindent=0.85em \labelitemii\ Description of responsibilities and achievements. \\
         \hangindent=0.85em \labelitemii\ Additional accomplishments or notable contributions. \\
         \end{tabular}}
@@ -361,7 +371,7 @@
         \begin{minipage}[t]{1\linewidth}
         \small
         {\ExpBulHeight
-        \begin{tabular}{@{\hspace*{\ExpBulStart}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
+        \begin{tabular}{@{\hspace*{\ExpBulStart}}>{\setlength{\baselineskip}{\ExpWrapHeight}}p{\dimexpr\linewidth-\ExpRightMargin-\ExpBulStart\relax}@{}}
         \hangindent=0.85em \labelitemii\ Description of responsibilities and achievements. \\
         \hangindent=0.85em \labelitemii\ Additional accomplishments or notable contributions. \\
         \end{tabular}}

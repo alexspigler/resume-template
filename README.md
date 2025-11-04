@@ -50,6 +50,6 @@ This version extends Jake Gutierrez’s original template with several key impro
 
 ## Preview
 
-![Resume Preview](resume-preview.png)
+![Resume Template](resume-template.png)
 
 ---

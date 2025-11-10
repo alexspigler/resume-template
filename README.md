@@ -7,13 +7,6 @@ Which itself was based on: https://github.com/sb2nov/resume (Sourabh Bajaj)
 
 ---
 
-## Features
-
-- **Independent spacing controls** - separate parameters for space between bullets and within wrapped lines, plus indentation and margin settings
-- **Centralized customization** - all parameters clearly grouped and documented (no digging through code)
-- **ATS-friendly design** - fully machine-readable and optimized for applicant tracking systems
-- **Flexible typography** - quickly switch between multiple sans-serif and serif fonts
-
 ## Quick Start
 
 1. Install a LaTeX distribution ([MacTeX](https://www.tug.org/mactex/), [MiKTeX](https://miktex.org/), or [TeX Live](https://www.tug.org/texlive/))
@@ -25,19 +18,7 @@ Which itself was based on: https://github.com/sb2nov/resume (Sourabh Bajaj)
 pdflatex resume-template.tex
 ```
 
-## Customization
-
-All section-specific spacing and indentation settings are defined near the top of the file under “Tunable Settings.”
-
-**Example - adjust bullet spacing in the "Project" section:**
-```latex
-\newcommand{\ProjBulHeight}{\renewcommand{\arraystretch}{1.25}}  % space between bullets
-\newlength{\ProjWrapHeight} \setlength{\ProjWrapHeight}{11pt}    % space within wrapped lines
-```
-
-Increase the first for more space between bullets, or decrease the second to tighten wrapped lines under the same bullet.
-
-Each section (Education, Experience, Projects, Skills) has its own labeled control block — just search for the comments.
+---
 
 ## What's Different?
 
